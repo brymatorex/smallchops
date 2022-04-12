@@ -1,0 +1,130 @@
+:root {
+    --light-blue: #F0F4FF;
+    --blue: #0938B1;
+    --white: #fff;
+    --black: #000;
+    --font-dark: 700;
+    --font6: 600;
+    --font-n: 500;
+    --font-norm: 400;
+    --l-black: #2C2C2C;
+    --inter: 'Inter', sans-serif;
+    --fs: 1.2rem;
+}
+/* border box model: url: https://css-tricks.com/box-sizing */
+html {
+    box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+body {
+    padding: o;
+    margin: 0;
+    font-family: var(--inter);
+    background-color: var(--white);
+    font-size: var(--fs);
+    text-align: center;
+}
+h1,
+h2,
+h3 {
+    margin: 0;
+}
+.container {
+    width: 637px;
+    height: auto;
+    color:#000;
+    background-color: #fff;
+    position: absolute;
+    top: 5%;
+    left: 30%;
+    border: 1px solid black;
+}
+nav {
+    position: relative;
+    margin: 5px;
+    padding: 40px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1px;
+}
+ nav h2 {
+    flex-basis: 100%;
+    align-items: center;
+    text-align: center;
+    font-weight: var(--font6);
+}
+.input-box {
+    border-radius: 0;
+    padding: 20px;
+    width: 80%;
+    outline: none;
+    border: 1px solid #999;
+    justify-content: left;
+    text-align: left;
+    margin: 5px auto;
+}
+.form {
+    justify-content: left;
+    text-align: left;
+    padding: 0 0 0 120px;
+}
+.form .text {
+    color:#000;
+    justify-content: left;
+    text-align: left;
+    margin: 15px 0 0 0 ;
+    font-family: var(--inter);
+    font-size: 16px;
+    font-weight: var(--font-norm);
+}
+.form .pass {
+    margin-top: 0;
+    padding: 0;
+    font-family: var(--inter);
+    font-size: 12px;
+    font-weight: var(--font-norm);
+}
+.just-btn {
+    position: relative;
+    width: 415px;
+    height: 60px;
+    margin: 30px 0 0 15px;
+    padding: 20px 40px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: var(--blue);
+    color: var(--white);
+    font-family: var(--inter);
+    font-weight: var(--font-dark);
+    font-size: 15px;
+}
+.google-btn {
+    position: relative;
+    width: 418px;
+    height: 60px;
+    margin: 30px 0 0 15px;
+    padding: 20px 60px;
+    background-color: var(--white);
+    color: var(--black);
+    font-family: var(--inter);
+    font-weight: var(--font-n);
+    font-size: 20px;
+    /* display: flex;
+    flex-wrap: row wrap; */
+}
+.fellow p {
+    font-size: 14px;
+    font-weight: var(--font-norm);
+    font-family: var(--inter);
+}
+.fellow p span a {
+    color: var(--blue);
+    text-decoration: none;
+}

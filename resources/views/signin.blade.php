@@ -11,7 +11,7 @@
 <body>
 
 
-    <header>
+    <header onload="joinUs()">
         <nav>
            <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -30,10 +30,39 @@
                 <li>
                     <h1>Bits<span onclick="openNav()">Please</span></h1>
                 </li>
-                 
                 <div class="rightnav">
-                <li class="rm">FAQ</li>
-                <li><button>Join us</button></li>
+                @guest
+                            @if (Route::has('login'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                            @endif
+
+                            @if (Route::has('register'))
+                            <li><button>Join us</button></li>
+                            @endif
+                        @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
+                                </a>
+                                <li class="rm">FAQ</li>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
+                
+                
+                
             </div>
 
             </ul>
@@ -56,15 +85,28 @@
             <p class="text-p">
                 We have a step-by-step guide, dedicated mentors, curious learners and resources to help you achieve your goals. 
             </p>
-            <nav class="btn"> 
-            <a href="{{ route('login') }}"> sign in</a>
-            <a href="{{ route('register-user') }}">join us</a>
-                <!-- <button class="sign-btn" onclick="signIn()"> Sign in</button> -->
+            
+            <!-- <a href="{{ route('login') }}"> sign in</a> -->
+            
+            <!-- <button class="join-btn" onclick="joinUs()">Join us now</button> -->
+                
                 <!-- <form method="post"login action=""> -->
                 <!-- <button class="join-btn" onclick="joinUs()">Join us now</button> -->
             <!-- </form> -->
-            </nav>
+            
+            @if (Route::has('login'))
+            <nav class="btn"> 
+                    @auth
+                        <a href="{{ url('/home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Home</a>
+                    @else
+                    <button class="sign-btn" onclick="signIn()"> Sign in</button>
 
+                        @if (Route::has('register'))
+                        <a class="join-btn" role="button" href="{{ route('register-user') }}">join us</a>
+                        @endif
+                    @endauth
+                    </nav>
+            @endif
             <div class="chat">
 
                 <div class="chat-img">
@@ -89,15 +131,17 @@
 
 
     </div>
+    
   <!-- ========Join us========== -->
     
-    <div class="container-join-us" style="display: none">
+<div class="container-join-us">
         <nav class="navsignin"> 
             <h2 id="welcome">We're glad you came!</h2> 
             <h5 id="welcome">Don't wait anylonger. Sign up!</h5>
             <button id="cancelbutton" onclick="closeJoinUs()">X</button></br>
         </nav>
      </div>
+    
 
  
 
@@ -114,18 +158,20 @@
     </nav>
     <div>
         <div class="form">
-            <form action="">
+        <form method="POST" action="{{ route('login.custom') }}">
+                            @csrf
 
             <p class="text">Email Address</p>
             <input type="text" class="input-box" name="email" placeholder="Enter your email address">
             <p class="text">Password</p>
             <input type="password" class="input-box" name="password" placeholder="Create password">
             <p  class="pass">Forgot password?</p>
-            </form>
+            
         </div>
 
         <div class="fellow">
             <button class="just-btn">Login</button>
+        </form>
             <p>Alternatively</p>
             <button class="google-btn"> 
              <input class="google-img" type="Image" src="./flat-color-icons_google.png" height="30" width="30">
@@ -162,7 +208,7 @@ function closeSignIn() {
 }
 
 function closeJoinUs() {
-    console.log("sign up")
+    // console.log("sign up")
     document.querySelector('.container-join-us').style.display = "none";
 }
 </script>
